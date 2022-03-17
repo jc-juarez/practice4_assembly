@@ -1,11 +1,11 @@
 	.data
 	.balign 4
-format: .asciz "%d"
-format2: .asciz "%c"
+format: .asciz " %d"
+format2: .asciz " %c"
 num1: .int 0
 num2: .int 0
 result: .int 0
-op: .char 'a'
+op: .byte 'a'
 input1: .asciz "Enter the first operand:\n"
 inputO: .asciz "Enter the operation to be performed (+, -, *, /):\n"
 input2: .asciz "Enter the second operand:\n"
@@ -34,6 +34,11 @@ main:
 	ldr r1, =op
 	bl scanf
 
+	ldr r0, =outTest
+	ldr r1, =op
+	ldr r1, [r1]
+	bl printf
+
 	ldr r0, =input2
 	bl printf
 
@@ -58,7 +63,7 @@ main:
 	muleq r0, r1, r2
 
 	cmp r3, #0x2F
-	diveq r0, r1, r2
+	sdiveq r0, r1, r2
 
 	ldr r1, =result
 	str r0, [r1]
